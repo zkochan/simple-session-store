@@ -15,7 +15,8 @@ SessionStore.prototype.set = function(sid, session, cb) {
 
 exports.register = function(server, opts, next) {
   var sessionStore = new SessionStore();
-  server.expose(sessionStore);
+  server.expose('set', sessionStore.set.bind(sessionStore));
+  server.expose('get', sessionStore.get.bind(sessionStore));
 
   next();
 };
